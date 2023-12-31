@@ -14,7 +14,11 @@ npm install ou yarn install
 ```
 composer install
 ```
+- iniciar o servidor
 
+```
+npm run start ou yarn run start
+```
 
 - iniciar o php artisan
 
