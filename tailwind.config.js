@@ -1,3 +1,4 @@
+/* tailwind.config.js */
 import preset from './vendor/filament/support/tailwind.config.preset'
 
 export default {

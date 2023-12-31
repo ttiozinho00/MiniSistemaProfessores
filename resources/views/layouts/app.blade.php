@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ showLogoutButton: false }">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,51 +23,47 @@
 
 </head>
 <body class="antialiased">
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container mx-auto">
-                <a class="navbar-brand" href="{{ url('/') }}">
+    <div id="app" class="grid grid-rows-[auto,1fr] min-h-screen">
+        <!-- Header -->
+        <nav class="bg-white shadow-sm">
+            <div class="container mx-auto flex items-center justify-between p-4">
+                <a class="text-lg font-bold" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="lg:hidden">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
+                <div class="hidden lg:flex space-x-4">
+                    <!-- Navigation Links -->
+                    <ul class="flex items-center space-x-4">
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
+                                <li>
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                <li>
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <!-- User Dropdown -->
+                            <li class="relative">
+                                <button id="navbarDropdown" class="nav-link">
                                     {{ Auth::user()->name }}
-                                </a>
+                                </button>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                <div class="dropdown-menu absolute right-0 mt-2 bg-white border border-gray-200 rounded shadow-md hidden">
+                                    <a class="dropdown-item block px-4 py-2" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                                         @csrf
                                     </form>
                                 </div>
@@ -78,7 +74,8 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <!-- Main Content -->
+        <main class="p-4">
             @yield('content')
         </main>
     </div>
