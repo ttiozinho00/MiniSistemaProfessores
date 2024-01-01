@@ -47,7 +47,10 @@ class MessageController extends Controller
         // Adicione a lógica para definir o status como pendente ao criar a mensagem
         $request->merge(['status_response' => 'pendente']);
 
-        Message::create($request->all());
+        // Criação da mensagem e associação automática da matéria através do professor
+        $professor = Professor::find($request->input('professor_id'));
+        $message = Message::create($request->all());
+        $message->update(['matter_id' => $professor->matter_id ?? null]);
 
         return redirect()->route('messages.create')->with('success', 'Mensagem enviada com sucesso!');
     }
@@ -105,3 +108,4 @@ class MessageController extends Controller
         return redirect()->route('messages.index')->with('success', 'Mensagem excluída com sucesso!');
     }
 }
+

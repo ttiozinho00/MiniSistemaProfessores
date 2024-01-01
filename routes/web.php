@@ -20,6 +20,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/professors/my-messages', [MessageController::class, 'professorMessages'])->name('messages.professor');
     Route::get('/professors/all-pending-messages', [ProfessorController::class, 'allPendingMessages'])->name('professors.allPendingMessages');
     Route::get('/professors/all-responded-messages', [ProfessorController::class, 'allRespondedMessages'])->name('professors.allRespondedMessages');
+
+    Route::get('/professors/{professor}', 'ProfessorController@show')->name('professors.show');
+
 });
 
 Auth::routes();

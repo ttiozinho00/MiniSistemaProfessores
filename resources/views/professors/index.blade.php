@@ -7,16 +7,22 @@
             <table class="w-full border border-gray-300">
                 <thead>
                     <tr class="bg-gray-100">
-                        <th class="py-2 px-4 border-b">ID</th>
                         <th class="py-2 px-4 border-b">Nome do Professor</th>
+                        <th class="py-2 px-4 border-b">Nome da Matéria</th>
                         <th class="py-2 px-4 border-b">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($professors as $professor)
                         <tr class="border-b">
-                            <td class="py-2 px-4">{{ $professor->id }}</td>
                             <td class="py-2 px-4">{{ $professor->name }}</td>
+                            <td class="py-2 px-4">
+                                @if($professor->matter)
+                                    {{ $professor->matter->name }}
+                                @else
+                                    Não há matéria cadastrada
+                                @endif
+                            </td>
                             <td class="py-2 px-4">
                                 <form action="{{ route('professors.destroy', ['professor' => $professor->id]) }}" method="POST">
                                     @csrf

@@ -9,6 +9,7 @@
                     <th class="border px-4 py-2">{{ __('Nome do Aluno') }}</th>
                     <th class="border px-4 py-2">{{ __('Data') }}</th>
                     <th class="border px-4 py-2">{{ __('Professor') }}</th>
+                    <th class="border px-4 py-2">{{ __('Matéria') }}</th>
                     <th class="border px-4 py-2">{{ __('Status') }}</th>
                     <th class="border px-4 py-2">{{ __('Ações') }}</th>
                 </tr>
@@ -19,6 +20,7 @@
                         <td class="border px-4 py-2">{{ $message->student_name }}</td>
                         <td class="border px-4 py-2">{{ $message->created_at->format('d/m/Y') }}</td>
                         <td class="border px-4 py-2">{{ $message->professor->name }}</td>
+                        <td class="border px-4 py-2">{{ $message->professor->matter->name ?? 'Sem Matéria' }}</td>
                         <td class="border px-4 py-2 text-center">
                             <p>{{ $message->getStatusAttribute() }}</p>
                         </td>

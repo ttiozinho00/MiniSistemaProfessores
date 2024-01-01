@@ -9,12 +9,21 @@ class Message extends Model
 {
     use HasFactory;
 
-     protected $fillable = ['student_name', 'birth_date', 'city', 'state', 'email', 'whatsapp', 'user_id', 'professor_id', 'status', 'response', 'status_response'];
+    protected $fillable = [
+        'student_name', 'birth_date', 'city', 'state', 'email', 'whatsapp',
+        'user_id', 'professor_id', 'status', 'response', 'status_response', 'matter_id'
+    ];
 
     // Relação com a tabela Professor
     public function professor()
     {
         return $this->belongsTo(Professor::class, 'professor_id');
+    }
+
+    // Relação com a tabela Matter
+    public function matter()
+    {
+        return $this->belongsTo(Matter::class, 'matter_id');
     }
 
     // Relação com a tabela User

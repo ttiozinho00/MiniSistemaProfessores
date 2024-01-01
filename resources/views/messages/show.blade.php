@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto mt-8 flex flex-col items-center justify-center"> <!-- Adiciona flex, items-center e justify-center para centralizar vertical e horizontalmente -->
+    <div class="container mx-auto mt-8 flex flex-col items-center justify-center">
         <h2 class="text-3xl font-bold mb-4">Detalhes da Mensagem</h2>
-        <div class="text-left"> <!-- Adiciona text-left para justificar o texto -->
+        <div class="text-left">
             <p><strong>Nome do Aluno:</strong> {{ $message->student_name }}</p>
             <p><strong>Data de Nascimento:</strong> {{ \Carbon\Carbon::parse($message->birth_date)->format('d/m/Y') }}</p>
             <p><strong>Cidade:</strong> {{ $message->city }}</p>
@@ -11,7 +11,16 @@
             <p><strong>E-mail:</strong> {{ $message->email }}</p>
             <p><strong>Whatsapp:</strong> {{ $message->whatsapp }}</p>
             <p><strong>Status:</strong> {{ $message->status_response === 'pendente' ? 'Pendente' : 'Respondido' }}</p>
-            <p><strong>Professor:</strong> {{ $message->professor ? $message->professor->name : 'N/A' }}</p>
+            <p><strong>Professor:</strong>
+                @if($message->professor)
+                    {{ $message->professor->name }}
+                    @if($message->professor->matter)
+                        ({{ $message->professor->matter->name }})
+                    @endif
+                @else
+                    Não há materia cadastrada
+                @endif
+            </p>
         </div>
         
         <div class="flex justify-center mt-4">

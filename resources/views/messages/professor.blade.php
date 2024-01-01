@@ -8,6 +8,7 @@
                 <thead>
                     <tr class="bg-gray-200">
                         <th class="px-4 py-2">Nome do Aluno</th>
+                        <th class="px-4 py-2">Matéria</th>
                         <th class="px-4 py-2">Data</th>
                         <th class="px-4 py-2">Status</th>
                         <th class="px-4 py-2">Ações</th>
@@ -17,6 +18,13 @@
                     @foreach ($userMessages as $message)
                         <tr>
                             <td class="border px-4 py-2">{{ $message->student_name }}</td>
+                            <td class="border px-4 py-2">
+                                @if($message->professor && $message->professor->matter)
+                                    {{ $message->professor->matter->name }}
+                                @else
+                                    Sem matéria associada
+                                @endif
+                            </td>
                             <td class="border px-4 py-2">{{ $message->created_at->format('d/m/Y') }}</td>
                             <td class="border px-4 py-2">{{ $message->status_response }}</td>
                             <td class="border px-4 py-2">

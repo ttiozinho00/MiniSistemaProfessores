@@ -10,6 +10,7 @@
                         <th class="py-2 px-4 border-b">{{ __('Nome do Aluno') }}</th>
                         <th class="py-2 px-4 border-b">{{ __('Data') }}</th>
                         <th class="py-2 px-4 border-b">{{ __('Professor') }}</th>
+                        <th class="py-2 px-4 border-b">{{ __('Matéria') }}</th>
                         <th class="py-2 px-4 border-b">{{ __('Status') }}</th>
                         <th class="py-2 px-4 border-b">{{ __('Ações') }}</th>
                     </tr>
@@ -20,6 +21,7 @@
                             <td class="py-2 px-4">{{ $message->student_name }}</td>
                             <td class="py-2 px-4">{{ $message->created_at->format('d/m/Y') }}</td>
                             <td class="py-2 px-4">{{ $message->professor->name }}</td>
+                            <td class="py-2 px-4">{{ $message->professor->matter->name ?? ' Não há materia cadastrada' }}</td>
                             <td class="py-2 px-4 text-left">
                                 <p>{{ $message->status }}</p>
                             </td>
@@ -31,7 +33,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="py-2 px-4">{{ __('Nenhuma mensagem pendente disponível.') }}</td>
+                            <td colspan="6" class="py-2 px-4">{{ __('Nenhuma mensagem pendente disponível.') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
